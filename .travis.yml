@@ -4,13 +4,6 @@ services:
 cache:
   directories:
     - $HOME/.docker/cli-plugins
-    - docker-cache
-
-before_install:
-  - docker load -i docker-cache/docker-images.tar || true
-
-before_cache:
-  - docker save -o docker-cache/docker-images.tar $(docker images -a -q)
 
 jobs:
   include:
