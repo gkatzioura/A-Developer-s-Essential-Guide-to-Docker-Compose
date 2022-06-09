@@ -3,7 +3,7 @@ services:
 
 cache:
   directories:
-    - /home/travis/.docker/cli-plugins
+    - $HOME/.docker/cli-plugins
 
 before_install:
   - mkdir -p /home/travis/.docker/cli-plugins/
@@ -16,7 +16,7 @@ jobs:
     - stage: "Build Images"
       script:
       - cd Chapter8
-      - docker compose -f docker-compose.yaml -f newsletter-lambda/docker-compose.yaml -f s3store-lambda/docker-compose.yaml -f sqs-to-lambda/docker-compose.yaml build     -
+      - docker compose -f docker-compose.yaml -f newsletter-lambda/docker-compose.yaml -f s3store-lambda/docker-compose.yaml -f sqs-to-lambda/docker-compose.yaml build
     - stage: "Test application"
       script:
         - cd Chapter8
