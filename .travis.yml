@@ -1,9 +1,9 @@
 services:
   - docker
 
-#cache:
-#  directories:
-#    - /home/travis/.docker/cli-plugins
+cache:
+  directories:
+    - /home/travis/.docker/cli-plugins
 
 before_install:
   - mkdir -p /home/travis/.docker/cli-plugins/
