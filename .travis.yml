@@ -4,15 +4,22 @@ services:
 cache:
   directories:
     - $HOME/.docker/cli-plugins
+    - docker-cache
 
 before_install:
-  - mkdir -p /home/travis/.docker/cli-plugins/
-  - curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-  - chmod +x ~/.docker/cli-plugins/docker-compose
-  - docker compose version
+  - docker load -i docker-cache/docker-images.tar || true
+
+before_cache:
+  - docker save -o docker-cache/docker-images.tar $(docker images -a -q)
 
 jobs:
   include:
+    - stage: "Install Compose"
+      script:
+      - mkdir -p /home/travis/.docker/cli-plugins/
+      - curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+      - chmod +x ~/.docker/cli-plugins/docker-compose
+      - docker compose version
     - stage: "Build Images"
       script:
       - cd Chapter8
