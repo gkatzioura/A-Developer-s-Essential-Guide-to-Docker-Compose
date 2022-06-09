@@ -13,11 +13,11 @@ before_install:
 
 jobs:
   include:
-    - stage: Build Images
+    - stage: "Build Images"
       script:
       - cd Chapter8
       - docker compose -f docker-compose.yaml -f newsletter-lambda/docker-compose.yaml -f s3store-lambda/docker-compose.yaml -f sqs-to-lambda/docker-compose.yaml build     -
-    - stage: Test application
+    - stage: "Test application"
       script:
         - cd Chapter8
         - docker compose -f docker-compose.yaml -f newsletter-lambda/docker-compose.yaml -f s3store-lambda/docker-compose.yaml -f sqs-to-lambda/docker-compose.yaml up -d
